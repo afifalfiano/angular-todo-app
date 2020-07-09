@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 
-
-var TODOS = [
+let TODOS = [
   { title: 'Install Angular CLI', isDone: true },
   { title: 'Style app', isDone: true },
-  { title: 'Finish service functionality', isDone:false },
-  { title: 'Setup API', isDone:false },
+  { title: 'Finish service functionality', isDone: false },
+  { title: 'Setup API', isDone: false },
 ];
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +18,10 @@ export class TodoService {
     return new Promise(resolve => {
       let data;
 
-      if(query === 'completed' || query === 'active'){
-        const isCompleted = query === 'completed';
+      if (query === 'completed' || query === 'active'){
+        const isCompleted = (query === 'completed');
         data = TODOS.filter(todo => todo.isDone === isCompleted);
-      }else{
+      } else {
         data = TODOS;
       }
       resolve(data);
@@ -40,7 +37,7 @@ export class TodoService {
 
   put(changed) {
     return new Promise(resolve => {
-      const index = TODOS.findIndex(todo => todo === changed);
+      const index = TODOS.findIndex(todo => (todo === changed));
       TODOS[index].title = changed.title;
       resolve(changed);
     });
@@ -48,7 +45,7 @@ export class TodoService {
 
   delete(selected) {
     return new Promise(resolve => {
-      const index = TODOS.findIndex(todo => todo === selected);
+      const index = TODOS.findIndex(todo => (todo === selected));
       TODOS.splice(index, 1);
       resolve(true);
     });

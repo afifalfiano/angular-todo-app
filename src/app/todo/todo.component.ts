@@ -7,7 +7,7 @@ import { TodoService } from './todo.service';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss'],
+  styles: [''],
   providers: [TodoService]
 })
 export class TodoComponent implements OnInit {
@@ -20,6 +20,7 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      // tslint:disable-next-line:no-string-literal
       this.path = params['status'];
       this.getTodos(this.path);
     });
@@ -36,7 +37,7 @@ export class TodoComponent implements OnInit {
     this.todoService.add({title: this.newTodo, isDone:false}).then(() => {
       return this.getTodos();
     }).then(() => {
-      this.newTodo = ''; //clear input form value
+      this.newTodo = '';
     });
   }
 
@@ -44,6 +45,7 @@ export class TodoComponent implements OnInit {
     todo.title = newValue;
     return this.todoService.put(todo).then(() => {
       todo.editing = false;
+      console.log(todo);
       return this.getTodos();
     });
   }
@@ -60,15 +62,9 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  toggleTodo(todo){
+  toggleTodo(todo) {
     this.todoService.toggle(todo).then(() => {
       return this.getTodos();
     });
   }
-
- 
-
-
-
-
 }
